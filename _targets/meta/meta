@@ -1,0 +1,8 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+data|stem|79ac796b9d57e900|87f5902ed953433b|2c530c1562a7fbd1|33550471||t20487.6630406359s|s1743b|1743|rds|local|vector|||0.01||
+model|stem|90ae394a2e86538a|693e4c90d947b5eb|6b1c0d8cb3e6b67d|808688450||t20487.6630413447s|s108b|108|rds|local|vector|||0||
+file|stem|10e5450396c1fc9a|acfaffd90f7b85d3|2c530c1562a7fbd1|1735323524|data/RAIS_ESTAB_PUB.COMT|t20438.6159467257s|s1312762818b|1312762818|file|local|vector|||0.02||
+get_data|function|c97ad13de69282e1
+get_data_bdd|function|9d86cbb2b3f480fa
+get_data_microdata|function|c97ad13de69282e1
+raw_data|stem|0e8ecf91af7a72c1|c6a51f159fe66006|218bd2e5dd6ff5f3|-1101284392||t20487.7344674702s|s5835471b|5835471|rds|local|vector|||22.26||
