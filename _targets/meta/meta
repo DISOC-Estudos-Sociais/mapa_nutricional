@@ -1,0 +1,58 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+data|stem|79ac796b9d57e900|87f5902ed953433b|2c530c1562a7fbd1|33550471||t20487.6630406359s|s1743b|1743|rds|local|vector|||0.01||
+model|stem|90ae394a2e86538a|693e4c90d947b5eb|6b1c0d8cb3e6b67d|808688450||t20487.6630413447s|s108b|108|rds|local|vector|||0||
+file|stem|10e5450396c1fc9a|acfaffd90f7b85d3|2c530c1562a7fbd1|1735323524|data/RAIS_ESTAB_PUB.COMT|t20438.6159467257s|s1312762818b|1312762818|file|local|vector|||0.02||
+get_data|function|c97ad13de69282e1
+cep_file|stem|9ce7fbf1a7ff3ae7|a6e3d80262d94f0e|2c530c1562a7fbd1|420069255|data/2304400_FORTALEZA.csv|t20488.6764072247s|s193084822b|193084822|file|local|vector|||0||
+get_data_bdd|function|9d86cbb2b3f480fa
+get_cep|function|4719c3325d8c1248
+get_data_microdata|function|c97ad13de69282e1
+process_data|function|322c454054e7e81a
+raw_data|stem|fd8e234fb505e591|9b0e4272daf8f6c5|5225d9f4a62548af|-1101284392||t20490.5695314502s|s5835595b|5835595|rds|local|vector|||17.75||
+cep_data|stem|c0d77de293224007|8cde812684262ac5|f728ec58d528998e|725916107||t20490.5695850131s|s70413b|70413|rds|local|vector|||4.5|One or more parsing issues, call `problems()` on your data frame for details, e.g.:   dat <- vroom(...)   problems(dat)|
+clean_data|stem|9ee60b9741f0b0b9|54053688176bddbf|5c6821673e3432d8|-259385813||t20490.5696145502s|s150051b|150051|rds|local|vector|||0.01||
+joined_data|stem|87ac4e8c1f913772|a6cefa3abd6e68af|74a74d85a3cd56cb|1614141691||t20490.5696211492s|s260925b|260925|rds|local|vector|||0.06|Detected an unexpected many-to-many relationship between `x` and `y`. ℹ Row 1 of `x` matches multiple rows in `y`. ℹ Row 389 of `y` matches multiple rows in `x`. ℹ If a many-to-many relationship is expected, set `relationship =   'many-to-many'` to silence this warning.|
+filtrar_fortaleza|function|e061a7b13619eb4a
+tipos_colunas|object|391c2a3f8acc5449
+carregar_fortaleza|function|8f008ac9c2218dc3
+consolidar_estabelecimentos|function|a79b075533e2235c
+arquivos_entrada_362b174914c873e1|branch|e3dcffac634276d6|33873b9efbb2dab2|2c530c1562a7fbd1|-1539630537|data/Estabelecimentos/K3241.K03200Y0.D60110.ESTABELE|t20493.4799163877s|s6179165967b|6179165967|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_d964555b5677b929|branch|4dcea7eb764234a6|33873b9efbb2dab2|2c530c1562a7fbd1|439699954|data/Estabelecimentos/K3241.K03200Y1.D60110.ESTABELE|t20493.4810516064s|s1076734028b|1076734028|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_a392539743da93ed|branch|bbb5fc9eeefd7cab|33873b9efbb2dab2|2c530c1562a7fbd1|1621847824|data/Estabelecimentos/K3241.K03200Y2.D60110.ESTABELE|t20493.4812038966s|s1085592051b|1085592051|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_1e7cc37a9d680e42|branch|d592b14e2c0e8752|33873b9efbb2dab2|2c530c1562a7fbd1|113969412|data/Estabelecimentos/K3241.K03200Y3.D60110.ESTABELE|t20493.4813419889s|s1140890707b|1140890707|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_386ea1f39711658e|branch|b8efa4f64b0da52c|33873b9efbb2dab2|2c530c1562a7fbd1|1213733231|data/Estabelecimentos/K3241.K03200Y4.D60110.ESTABELE|t20493.4814864755s|s1095374976b|1095374976|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_625d5c0e8650aa37|branch|bea72d01e4e6bf67|33873b9efbb2dab2|2c530c1562a7fbd1|-1615142508|data/Estabelecimentos/K3241.K03200Y5.D60110.ESTABELE|t20493.4793149415s|s1081361651b|1081361651|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_186da83a5d0639dc|branch|66c3d81a114cd7cc|33873b9efbb2dab2|2c530c1562a7fbd1|1466139321|data/Estabelecimentos/K3241.K03200Y6.D60110.ESTABELE|t20493.4820410956s|s1123483808b|1123483808|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_763056bfda9b971d|branch|76fbff33a4289b1c|33873b9efbb2dab2|2c530c1562a7fbd1|534767876|data/Estabelecimentos/K3241.K03200Y7.D60110.ESTABELE|t20493.4821987066s|s1115987223b|1115987223|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_38e437745889d47e|branch|f734571c657b8d69|33873b9efbb2dab2|2c530c1562a7fbd1|-1072062845|data/Estabelecimentos/K3241.K03200Y8.D60110.ESTABELE|t20493.4823434073s|s1079215317b|1079215317|file|local|vector|arquivos_entrada||0||
+arquivos_entrada_19ed53eb25574fe6|branch|7cdd5becab43ec6c|33873b9efbb2dab2|2c530c1562a7fbd1|1410497496|data/Estabelecimentos/K3241.K03200Y9.D60110.ESTABELE|t20493.4827870146s|s1105154723b|1105154723|file|local|vector|arquivos_entrada||0||
+arquivos_entrada|pattern|def18b286a02f3e3|33873b9efbb2dab2||1474670868||||16082960451|file|local|vector||arquivos_entrada_362b174914c873e1*arquivos_entrada_d964555b5677b929*arquivos_entrada_a392539743da93ed*arquivos_entrada_1e7cc37a9d680e42*arquivos_entrada_386ea1f39711658e*arquivos_entrada_625d5c0e8650aa37*arquivos_entrada_186da83a5d0639dc*arquivos_entrada_763056bfda9b971d*arquivos_entrada_38e437745889d47e*arquivos_entrada_19ed53eb25574fe6|0||
+consolidar_para_parquet2|function|3c93009fbb8ad0d9
+parquet_estabelecimentos|stem|df5b78443c1da8c3|4fcd7389a98ef4f0|76b0ef13b4d6cf24|339032943|data/parquet/estabelecimentos|t20495.5614488111s|s5232794451b|5232794451|file|local|vector|||2196.96|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos|
+parquet_fortaleza|stem|982840758c7d020e|d341f2ff3da42080|42b0a1a20b45ec66|1656854976|data/parquet/fortaleza/ce_mun1389.parquet|t20495.5698413944s|s48705742b|48705742|file|local|vector|||13.85|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+fortaleza|stem|13416d669a491a1c|0270f55ee2c9b1cb|e47f010092445b96|-2056800143||t20495.5699759327s|s42689613b|42689613|qs|local|vector|||6.22|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+cnae_alimento_fortaleza|stem|1670931a4a73ff36|62c29c4ecc3ff519|035ae87fc3a85527|124449701||t20495.5939999525s|s3121726b|3121726|qs|local|vector|||0.06||
+salva_tabela|function|b433a8ef71017e08
+DIR_ENTRADA|object|1ff41b8b86091f8d
+get_cep_cnefe|function|4719c3325d8c1248
+filtrar_municipio|function|514ef1f85b26a2f9
+get_data_rais_bdd|function|9d86cbb2b3f480fa
+geoloc_data|function|7a72bac9a725bccb
+MUNICIPIO_ALVO|object|7895eb5751a5663a
+UF_ALVO|object|fa91379b78694b77
+DIR_FORTALEZA|object|f6181bae33fcdc2f
+process_data_rais|function|322c454054e7e81a
+colunas_estabelecimentos|object|157e407719f42746
+join_data|function|cec932ba82118aac
+CHUNK_SIZE|object|5e4f39adb9a2e0e9
+APENAS_ATIVAS|object|cc6a331fb3c0077c
+SOBRESCREVER|object|988c41ba10911dc8
+get_data_rais_microdata|function|c97ad13de69282e1
+plot_cnae|function|db619964a5f7dbf7
+listar_arquivos_entrada|function|ffb5d66acce8c1f9
+DIR_PARQUET|object|896cf2b595477b25
+carregar_municipio|function|73c0ea013b980d51
+consolidar_para_parquet|function|8c2381ed8622e368
+arquivos_entrada_files|stem|d150d5cea3f694a4|c2c234a7af8e7200|53ba4e63017a6404|433251309||t20495.6673686455s|s195b|195|rds|local|vector||arquivos_entrada_files_a7ac19ebad866b58*arquivos_entrada_files_08ae887b6e8c6a4e*arquivos_entrada_files_ac04d7f389eb3072*arquivos_entrada_files_28600651ae62b99f*arquivos_entrada_files_8e0a182c59d5c54d*arquivos_entrada_files_d3b8cd021b36622c*arquivos_entrada_files_3e919d5bcbe88578*arquivos_entrada_files_a90ad3241c3fce98*arquivos_entrada_files_3222e8d00c3b216b*arquivos_entrada_files_3f43c08f2377ef03|0.02||
+fortaleza_geoloc|stem|e1094ca7045e73eb|413b8a86f3f0676c|035ae87fc3a85527|-1020247988||t20495.667521321s|s6180487b|6180487|qs|local|vector|||6.83||
+estabelecimentos_bairro|stem|23e6f1ab7c83d21b|4b427ef7e05fe919|a3476d6cabe42767|1812497096||t20495.6675340995s|s1851b|1851|qs|local|vector|||0.72||
