@@ -267,9 +267,14 @@ listar_arquivos_entrada <- function(
 #' @return Caminho do diretorio do dataset Parquet.
 consolidar_para_parquet <- function(
     arquivos,
-    dir_saida  = "data/parquet/estabelecimentos",
-    chunk_size = 500000L
+    dir_saida    = "data/parquet/estabelecimentos",
+    chunk_size   = 500000L,
+    sobrescrever = FALSE   # TRUE apaga o dataset anterior antes de recriar
 ) {
+  if (sobrescrever && dir_exists(dir_saida)) {
+    message("Removendo dataset anterior: ", dir_saida)
+    dir_delete(dir_saida)
+  }
   dir_create(dir_saida, recurse = TRUE)
   
   n_esperado   <- length(colunas_estabelecimentos)  # 30
@@ -322,8 +327,14 @@ consolidar_para_parquet <- function(
         col_names        = FALSE,
         col_types        = cols(.default = col_character()),
         locale           = locale(encoding = "latin1"),
-        quote            = "",
+        # quote = '"' e o padrao do readr: interpreta aspas duplas como
+        # delimitador de campo, removendo-as do valor e tratando ";" internos
+        # (ex.: cnae_fiscal_secundario) como parte do campo, nao como separador.
+        # NAO usar quote = "" — isso desativa o quoting, faz as aspas virarem
+        # parte do valor e transforma ";" dentro de campos em colunas extras.
+        quote            = "\"",
         escape_backslash = FALSE,
+        escape_double    = TRUE,   # padrao RFC 4180: "" dentro de campo = "
         progress         = FALSE
       ),
       error = function(e) warning("Erro em '", nome_arquivo, "': ", conditionMessage(e))
@@ -356,6 +367,7 @@ consolidar_para_parquet <- function(
   
   dir_saida
 }
+
 
 # -----------------------------------------------------------------------------
 # 3. filtrar_municipio()
@@ -443,4 +455,24 @@ carregar_municipio <- function(arquivo_parquet) {
   message("Base carregada: ", format(nrow(df), big.mark = "."),
           " registros | ", ncol(df), " colunas")
   df
+}
+
+# -----------------------------------------------------------------------------
+# 5. salva_tabela()
+# -----------------------------------------------------------------------------
+#' Salva a tabela de estabelecimentos por bairro.
+#'
+#' @param df Tabela
+#' @param pasta Caminho para o arquivo
+#' @return Tibble com os dados por bairro
+salva_tabela <- function(df, 
+                         pasta = "data/") {
+  tabela <- df |>
+    dplyr::count(localidade_encontrada, sort = TRUE)
+  
+  arquivo_saida <- fs::path(pasta, "tabela_bairro.csv")
+  
+  readr::write_csv2(tabela, arquivo_saida)
+  
+  tabela
 }

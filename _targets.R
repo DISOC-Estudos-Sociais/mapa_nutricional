@@ -40,7 +40,7 @@ tar_source("R/functions.R")
 # OPÇÕES GLOBAIS DO PIPELINE
 # -----------------------------------------------------------------------------
 tar_option_set(
-  packages = c("arrow", "dplyr", "readr", "stringr", "fs"),
+  packages = c("arrow", "dplyr", "readr", "stringr", "fs" ,"geocodebr"),
   
   # Formato padrão de serialização dos alvos.
   # "qs" é mais rápido e compacto que "rds" para tibbles grandes.
@@ -51,6 +51,7 @@ tar_option_set(
   seed = 42L
 )
 
+
 # -----------------------------------------------------------------------------
 # PARÂMETROS DO PIPELINE
 # (altere aqui sem precisar tocar nas funções)
@@ -60,9 +61,12 @@ DIR_PARQUET  <- "data/parquet/estabelecimentos"
 DIR_FORTALEZA <- "data/parquet/fortaleza"
 
 UF_ALVO          <- "CE"
-MUNICIPIO_ALVO   <- "1051"   # Fortaleza — tabela de municípios da RF
-APENAS_ATIVAS    <- TRUE
-CHUNK_SIZE       <- 100000L  # Ajuste conforme RAM disponível
+MUNICIPIO_ALVO   <- "1389"   # Fortaleza — tabela de municípios da RF
+APENAS_ATIVAS    <- FALSE
+CHUNK_SIZE       <- 500000L  # Ajuste conforme RAM disponível
+# Mude para TRUE quando precisar regerar o dataset do zero (ex.: correcao de bug)
+SOBRESCREVER     <- TRUE
+
 
 # -----------------------------------------------------------------------------
 # DEFINIÇÃO DOS ALVOS
@@ -80,30 +84,35 @@ list(
   tarchetypes::tar_files(
     name    = arquivos_entrada,
     command = listar_arquivos_entrada(
-      dir = DIR_ENTRADA,
-      padrao = "ESTABELE$")
+      dir    = DIR_ENTRADA,
+      padrao = "ESTABELE$"
+    )
   ),
   
   # ---------------------------------------------------------------------------
-  # ALVO 2 — Consolidar em Parquet particionado por UF
+  # ALVO 2 — Consolidar em Parquet particionado por arquivo de origem
   # ---------------------------------------------------------------------------
-  # Retorna o caminho do diretório do dataset.
+  # Retorna o caminho do diretorio do dataset.
   # `format = "file"` instrui o targets a rastrear o artefato em disco
-  # (hash do diretório) em vez de serializar o valor em R.
-  # Assim, este alvo pesado só é reexecutado se os arquivos de entrada
-  # mudarem ou se o diretório de saída for apagado/modificado.
+  # (hash do diretorio) em vez de serializar o valor em R.
+  # Assim, este alvo pesado so e reexecutado se os arquivos de entrada
+  # mudarem ou se o diretorio de saida for apagado/modificado.
+  # Para forcar a regeracao (ex.: correcao de bug), mude SOBRESCREVER para TRUE,
+  # execute tar_make() uma vez e volte para FALSE.
   # ---------------------------------------------------------------------------
   tar_target(
     name    = parquet_estabelecimentos,
     command = consolidar_para_parquet(
-      arquivos = arquivos_entrada,
-      dir_saida  = DIR_PARQUET,
-      chunk_size = CHUNK_SIZE),
-    format = "file"    # rastreia o diretório como artefato em disco
+      arquivos     = arquivos_entrada,
+      dir_saida    = DIR_PARQUET,
+      chunk_size   = CHUNK_SIZE,
+      sobrescrever = SOBRESCREVER
+    ),
+    format = "file"    # rastreia o diretorio como artefato em disco
   ),
   
   # ---------------------------------------------------------------------------
-  # ALVO 3 — Filtrar Fortaleza (aproveitando partition pruning por UF)
+  # ALVO 3 — Filtrar Fortaleza
   # ---------------------------------------------------------------------------
   # Retorna o caminho do arquivo Parquet filtrado.
   # Depende de `parquet_estabelecimentos` (diretório) — se a consolidação
@@ -132,27 +141,40 @@ list(
     name    = fortaleza,
     command = carregar_municipio(parquet_fortaleza)
     # format = "qs" herdado das opções globais
-  )
+  ),
   
   # ---------------------------------------------------------------------------
   # EXEMPLOS DE ALVOS DE ANÁLISE (descomente e adapte conforme necessidade)
   # ---------------------------------------------------------------------------
   
-  # --- Contagem por CNAE principal ---
-  # tar_target(
-  #   name    = cnae_fortaleza,
-  #   command = fortaleza |>
-  #     count(cnae_fiscal_principal, sort = TRUE)
-  # ),
+  # --- Geolocalização dos endereços ---
+  tar_target(
+    name    = fortaleza_geoloc,
+    command = fortaleza |>
+      dplyr::filter(cnae_fiscal_principal %in% c("4711302", "4711301", "4721104", "4722901", "4712100", "4729699",
+                                          "4771701", "4771702", "4721103", "4723700", "4724500", "4729602",
+                                          "4771703"), sort = TRUE) |> 
+      dplyr::mutate(logradouro = stringr::str_c(tipo_logradouro, " ", logradouro),
+                    municipio = "Fortaleza") |> 
+      geocodebr::geocode(
+        campos_endereco = geocodebr::definir_campos(
+          estado = "uf",
+          municipio = "municipio",
+          cep = "cep",
+          logradouro = "logradouro",
+          localidade = "bairro",
+          numero = "numero"
+          ),
+        resultado_completo = TRUE,
+        padronizar_enderecos = TRUE
+        )
+  ),
   
-  # --- Série histórica de abertura de empresas ---
-  # tar_target(
-  #   name    = serie_abertura,
-  #   command = fortaleza |>
-  #     filter(!is.na(data_inicio_atividade)) |>
-  #     mutate(ano = format(data_inicio_atividade, "%Y")) |>
-  #     count(ano)
-  # ),
+  # --- Tabela de estabelecimentos por bairro ---
+  tar_target(
+    name    = estabelecimentos_bairro,
+    command = salva_tabela(fortaleza_geoloc, "data/")
+  )
   
   # --- Relatório Quarto/RMarkdown ---
   # tarchetypes::tar_quarto(
