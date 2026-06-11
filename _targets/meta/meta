@@ -30,29 +30,29 @@ arquivos_entrada|pattern|def18b286a02f3e3|33873b9efbb2dab2||1474670868||||160829
 consolidar_para_parquet2|function|3c93009fbb8ad0d9
 parquet_estabelecimentos|stem|df5b78443c1da8c3|4fcd7389a98ef4f0|76b0ef13b4d6cf24|339032943|data/parquet/estabelecimentos|t20495.5614488111s|s5232794451b|5232794451|file|local|vector|||2196.96|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso. 'big.mark' e 'decimal.mark' são ambos|
 parquet_fortaleza|stem|982840758c7d020e|d341f2ff3da42080|42b0a1a20b45ec66|1656854976|data/parquet/fortaleza/ce_mun1389.parquet|t20495.5698413944s|s48705742b|48705742|file|local|vector|||13.85|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
-fortaleza|stem|13416d669a491a1c|0270f55ee2c9b1cb|e47f010092445b96|-2056800143||t20495.5699759327s|s42689613b|42689613|qs|local|vector|||6.22|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
 cnae_alimento_fortaleza|stem|1670931a4a73ff36|62c29c4ecc3ff519|035ae87fc3a85527|124449701||t20495.5939999525s|s3121726b|3121726|qs|local|vector|||0.06||
-salva_tabela|function|b433a8ef71017e08
-DIR_ENTRADA|object|1ff41b8b86091f8d
 get_cep_cnefe|function|4719c3325d8c1248
-filtrar_municipio|function|514ef1f85b26a2f9
 get_data_rais_bdd|function|9d86cbb2b3f480fa
 geoloc_data|function|7a72bac9a725bccb
+process_data_rais|function|322c454054e7e81a
+join_data|function|cec932ba82118aac
+get_data_rais_microdata|function|c97ad13de69282e1
+plot_cnae|function|db619964a5f7dbf7
+arquivos_entrada_files|stem|d150d5cea3f694a4|c2c234a7af8e7200|53ba4e63017a6404|433251309||t20495.6673686455s||195|rds|local|vector||arquivos_entrada_files_a7ac19ebad866b58*arquivos_entrada_files_08ae887b6e8c6a4e*arquivos_entrada_files_ac04d7f389eb3072*arquivos_entrada_files_28600651ae62b99f*arquivos_entrada_files_8e0a182c59d5c54d*arquivos_entrada_files_d3b8cd021b36622c*arquivos_entrada_files_3e919d5bcbe88578*arquivos_entrada_files_a90ad3241c3fce98*arquivos_entrada_files_3222e8d00c3b216b*arquivos_entrada_files_3f43c08f2377ef03|0.03||Diretório de entrada não encontrado: data/Estabelecimentos
+fortaleza|stem|13416d669a491a1c|c3bab2fddea5fb0d|832948d2b6d7ae60|-2056800143||t20543.7708620546s|s42689613b|42689613|qs|local|vector|||6.23|'big.mark' e 'decimal.mark' são ambos '.', o que pode ser confuso|
+fortaleza_geoloc|stem|23c5c23bd882880a|6d9c73b6e9a1fe68|035ae87fc3a85527|-1020247988||t20543.7714113351s|s80761356b|80761356|qs|local|vector|||43.35||
+salva_tabela|function|b433a8ef71017e08
+DIR_ENTRADA|object|1ff41b8b86091f8d
+filtrar_municipio|function|514ef1f85b26a2f9
 MUNICIPIO_ALVO|object|7895eb5751a5663a
 UF_ALVO|object|fa91379b78694b77
 DIR_FORTALEZA|object|f6181bae33fcdc2f
-process_data_rais|function|322c454054e7e81a
 colunas_estabelecimentos|object|157e407719f42746
-join_data|function|cec932ba82118aac
 CHUNK_SIZE|object|5e4f39adb9a2e0e9
 APENAS_ATIVAS|object|cc6a331fb3c0077c
 SOBRESCREVER|object|988c41ba10911dc8
-get_data_rais_microdata|function|c97ad13de69282e1
-plot_cnae|function|db619964a5f7dbf7
 listar_arquivos_entrada|function|ffb5d66acce8c1f9
 DIR_PARQUET|object|896cf2b595477b25
 carregar_municipio|function|73c0ea013b980d51
 consolidar_para_parquet|function|8c2381ed8622e368
-arquivos_entrada_files|stem|d150d5cea3f694a4|c2c234a7af8e7200|53ba4e63017a6404|433251309||t20495.6673686455s|s195b|195|rds|local|vector||arquivos_entrada_files_a7ac19ebad866b58*arquivos_entrada_files_08ae887b6e8c6a4e*arquivos_entrada_files_ac04d7f389eb3072*arquivos_entrada_files_28600651ae62b99f*arquivos_entrada_files_8e0a182c59d5c54d*arquivos_entrada_files_d3b8cd021b36622c*arquivos_entrada_files_3e919d5bcbe88578*arquivos_entrada_files_a90ad3241c3fce98*arquivos_entrada_files_3222e8d00c3b216b*arquivos_entrada_files_3f43c08f2377ef03|0.02||
-fortaleza_geoloc|stem|e1094ca7045e73eb|413b8a86f3f0676c|035ae87fc3a85527|-1020247988||t20495.667521321s|s6180487b|6180487|qs|local|vector|||6.83||
-estabelecimentos_bairro|stem|23e6f1ab7c83d21b|4b427ef7e05fe919|a3476d6cabe42767|1812497096||t20495.6675340995s|s1851b|1851|qs|local|vector|||0.72||
+estabelecimentos_bairro|stem|c8987459b2969bec|4b427ef7e05fe919|a8d812968d68feb2|1812497096||t20543.7732046792s|s2069b|2069|qs|local|vector|||0.11||

@@ -81,13 +81,13 @@ list(
   # (baseado em hash do conteúdo, não apenas na data de modificação).
   # Cada arquivo vira um sub-alvo independente, permitindo paralelismo.
   # ---------------------------------------------------------------------------
-  tarchetypes::tar_files(
-    name    = arquivos_entrada,
-    command = listar_arquivos_entrada(
-      dir    = DIR_ENTRADA,
-      padrao = "ESTABELE$"
-    )
-  ),
+  # tarchetypes::tar_files(
+  #   name    = arquivos_entrada,
+  #   command = listar_arquivos_entrada(
+  #     dir    = DIR_ENTRADA,
+  #     padrao = "ESTABELE$"
+  #   )
+  # ),
   
   # ---------------------------------------------------------------------------
   # ALVO 2 — Consolidar em Parquet particionado por arquivo de origem
@@ -100,17 +100,17 @@ list(
   # Para forcar a regeracao (ex.: correcao de bug), mude SOBRESCREVER para TRUE,
   # execute tar_make() uma vez e volte para FALSE.
   # ---------------------------------------------------------------------------
-  tar_target(
-    name    = parquet_estabelecimentos,
-    command = consolidar_para_parquet(
-      arquivos     = arquivos_entrada,
-      dir_saida    = DIR_PARQUET,
-      chunk_size   = CHUNK_SIZE,
-      sobrescrever = SOBRESCREVER
-    ),
-    format = "file"    # rastreia o diretorio como artefato em disco
-  ),
-  
+  # tar_target(
+  #   name    = parquet_estabelecimentos,
+  #   command = consolidar_para_parquet(
+  #     arquivos     = arquivos_entrada,
+  #     dir_saida    = DIR_PARQUET,
+  #     chunk_size   = CHUNK_SIZE,
+  #     sobrescrever = SOBRESCREVER
+  #   ),
+  #   format = "file"    # rastreia o diretorio como artefato em disco
+  # ),
+  # 
   # ---------------------------------------------------------------------------
   # ALVO 3 — Filtrar Fortaleza
   # ---------------------------------------------------------------------------
@@ -118,17 +118,17 @@ list(
   # Depende de `parquet_estabelecimentos` (diretório) — se a consolidação
   # for refeita, este alvo também será invalidado automaticamente.
   # ---------------------------------------------------------------------------
-  tar_target(
-    name    = parquet_fortaleza,
-    command = filtrar_municipio(
-      dir_parquet      = parquet_estabelecimentos,
-      dir_saida        = DIR_FORTALEZA,
-      uf               = UF_ALVO,
-      codigo_municipio = MUNICIPIO_ALVO,
-      apenas_ativas    = APENAS_ATIVAS
-    ),
-    format = "file"
-  ),
+  # tar_target(
+  #   name    = parquet_fortaleza,
+  #   command = filtrar_municipio(
+  #     dir_parquet      = parquet_estabelecimentos,
+  #     dir_saida        = DIR_FORTALEZA,
+  #     uf               = UF_ALVO,
+  #     codigo_municipio = MUNICIPIO_ALVO,
+  #     apenas_ativas    = APENAS_ATIVAS
+  #   ),
+  #   format = "file"
+  # ),
   
   # ---------------------------------------------------------------------------
   # ALVO 4 — Carregar tibble de Fortaleza em memória
@@ -139,21 +139,21 @@ list(
   # ---------------------------------------------------------------------------
   tar_target(
     name    = fortaleza,
-    command = carregar_municipio(parquet_fortaleza)
+    command = carregar_municipio("data/parquet/fortaleza/ce_mun1389.parquet")
     # format = "qs" herdado das opções globais
   ),
   
   # ---------------------------------------------------------------------------
-  # EXEMPLOS DE ALVOS DE ANÁLISE (descomente e adapte conforme necessidade)
+  # ALVO 5:
   # ---------------------------------------------------------------------------
   
   # --- Geolocalização dos endereços ---
   tar_target(
     name    = fortaleza_geoloc,
     command = fortaleza |>
-      dplyr::filter(cnae_fiscal_principal %in% c("4711302", "4711301", "4721104", "4722901", "4712100", "4729699",
-                                          "4771701", "4771702", "4721103", "4723700", "4724500", "4729602",
-                                          "4771703"), sort = TRUE) |> 
+      #dplyr::filter(cnae_fiscal_principal %in% c("4711302", "4711301", "4721104", "4722901", "4712100", "4729699",
+                                          #"4771701", "4771702", "4721103", "4723700", "4724500", "4729602",
+                                          #"4771703"), sort = TRUE) |> 
       dplyr::mutate(logradouro = stringr::str_c(tipo_logradouro, " ", logradouro),
                     municipio = "Fortaleza") |> 
       geocodebr::geocode(
